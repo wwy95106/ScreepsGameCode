@@ -52,92 +52,65 @@ module.exports.loop = function () {
     //creep还有多少ticks死亡
     console.log("creep还有多少ticks死亡:"+creep.ticksToLive);
 
-    /*
-    let creep = Game.creeps['Harvester1'];//creep  Harvester1
-
-    if(creep.store.getFreeCapacity() > 0){//返回该存储的剩余可用容量
 
 
-        let sources = creep.room.find(FIND_SOURCES);//目标能量
 
-        if(Game.spawns['Spawn1'].store[RESOURCE_ENERGY] == 300){//如果母巢能量满，就去给控制器升级
-            creep.moveTo(Game.spawns['5bbcae419099fc012e638a6b']);
-            console.log(creep.moveTo(Game.spawns['5bbcae419099fc012e638a6b']));
-        }else{
 
-        }
 
-        if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(sources[0]);
-        }
 
-    }else{
 
-        if( creep.transfer(Game.spawns['Spawn1'], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE ) {
-            creep.moveTo(Game.spawns['Spawn1']);
-        }
 
-    }*/
 
+
+
+    //console.log(Game.creeps.length);
+    //console.log("---------"+Game.time+"---------")
+
+
+    //获取creep数量
+    let creepArr = _.filter(Game.creeps);
+    let spawn1 = Game.spawns['Spawn1'];
+    console.log('creep: ' + creepArr.length);
+
+    //creep数量小于2就生产
+    if(creepArr.length < 2){
+
+        let newName = 'Harvester' + Game.time;
+        console.log('Spawning new harvester: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName);
+
+    }
+
+    //creep执行
     for(let name in Game.creeps){
 
         let creep = Game.creeps[name];
 
-        //creep存储过程
-        if(creep.store.getFreeCapacity() === 50 ){//creep可用存储容量为空
-
-            let sources = creep.room.find(FIND_SOURCES);//目标能量
-
-            //离能量点距离不够就往能量点方向走1，距离够了就采集
-            if(creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0]);
-            }
-
-        }else{//creep可用存储容量满了
-
-
-            if(Game.spawns['Spawn1'].store[RESOURCE_ENERGY] < 250){//如果母巢可存储容量小于creep携带能量
-
-                console.log(creep.store.getUsedCapacity());
-                console.log(Game.spawns['Spawn1'].store[RESOURCE_ENERGY])
-
-
-                if( creep.transfer(Game.spawns['Spawn1'], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE ) {//creep将资源转移到spawn
+        //creep 能量满了就去升级或者存储，用完了能量就去补充
+        if(creep.store.getUsedCapacity() > 0){
+            if(Game.spawns['Spawn1'].store[RESOURCE_ENERGY] < 250){
+                //transfer spawns
+                if( creep.transfer(Game.spawns['Spawn1'], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE ) {
                     creep.moveTo(Game.spawns['Spawn1']);
                 }
-
-            }else{//如果母巢可存储容量小于creep携带能量
-
-                if( creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE ) {//creep去升级controller
+            }else{
+                //upgradeController
+                if( creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE ) {
 
                     creep.moveTo(creep.room.controller);
                 }
-
             }
-
-
-
+        }else{
+            let sources = creep.room.find(FIND_SOURCES);
+            //harvest sources
+            if(creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[0]);
+            }
         }
 
     }
 
-
-    //let creep = Game.creeps['Harvester1'];//creep  Harvester1
-    //let sources = creep.room.find(FIND_SOURCES);//目标能量
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //console.log("---------"+Game.time+"---------")
 
     
 }
