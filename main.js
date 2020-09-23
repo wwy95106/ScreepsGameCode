@@ -54,27 +54,18 @@ module.exports.loop = function () {
 
 
 
-
-
-
-
-
-
-
-
-
     //console.log(Game.creeps.length);
     //console.log("---------"+Game.time+"---------")
 
 
-    //获取creep数量
+    //get creeps length
     let creepArr = _.filter(Game.creeps);
     let spawn1 = Game.spawns['Spawn1'];
     console.log('creep: ' + creepArr.length);
 
-    //creep数量小于2就生产
-    if(creepArr.length < 2){
-
+    //creep.length. < 1
+    if(creepArr.length < 1){
+        //set creep name & spawnCreep
         let newName = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName);
@@ -85,9 +76,11 @@ module.exports.loop = function () {
     for(let name in Game.creeps){
 
         let creep = Game.creeps[name];
+        console.log(name+":"+creep.store.getUsedCapacity());
 
-        //creep 能量满了就去升级或者存储，用完了能量就去补充
+        //creep
         if(creep.store.getUsedCapacity() > 0){
+
             if(Game.spawns['Spawn1'].store[RESOURCE_ENERGY] < 250){
                 //transfer spawns
                 if( creep.transfer(Game.spawns['Spawn1'], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE ) {
@@ -100,17 +93,100 @@ module.exports.loop = function () {
                     creep.moveTo(creep.room.controller);
                 }
             }
+
         }else{
+
+            //目标能量
             let sources = creep.room.find(FIND_SOURCES);
-            //harvest sources
+            //离能量点距离不够就往能量点方向走1，距离够了就采集
             if(creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(sources[0]);
             }
+
         }
 
     }
 
-    //console.log("---------"+Game.time+"---------")
+
+
+
+
+
+    //harvest or transfer
+    if(creep.stroe.getFreeCapacity()>0){
+
+        //find sources
+        let sources = creep.room.find(FIND_SOURCES);
+        //moveTo sources & harvest
+        if(creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
+            creep.moveTo(sources[0]);
+        }
+
+    }else{
+        //transfer spawns
+        if( creep.transfer(Game.spawns['Spawn1'], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE ) {
+            creep.moveTo(Game.spawns['Spawn1']);
+        }
+    }
+
+
+    //upgrade controller
+    if(creep.stroe.getUsedCapacity() === 0){
+        //carry from spawn
+
+    }else{
+        //upgradeController
+        if( creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE ) {
+
+            creep.moveTo(creep.room.controller);
+        }
+    }
+
+
+
+
+    createCreep.check();
+
+    for(let name in Game.creeps){
+
+        let creep = Game.creeps[name];
+
+        if(creep.memory.role === 'Harvester'){
+            roleHarvester.run(creep);
+        }
+
+        if(creep.memory.role === 'Upgrader'){
+            roleUpgeader.upgrade(creep);
+        }
+
+
+
+    }
 
     
+}
+
+
+
+let roleHarvester = require('harvest');
+let roleUpgrader = require('upgrade');
+let createCreep = require('createCreep');
+
+module.exports.loop = function () {
+
+    createCreep.check();
+
+    for(let name in Game.creeps){
+
+        let creep = Game.creeps[name];
+
+        if(creep.memory.role === 'Harvester'){
+            roleHarvester.run(creep);
+        }
+
+        if(creep.memory.role === 'Upgrader'){
+            roleUpgrader.upgrade(creep);
+        }
+
+    }
 }
