@@ -163,6 +163,20 @@ module.exports.loop = function () {
 
     }
 
+    //快捷访问房间的静态地形数据
+    const terrain = Game.map.getRoomTerrain("E23N19");
+    switch(terrain.get(16,24)) {
+        case TERRAIN_MASK_WALL:
+            console.log(1,"TERRAIN_MASK_WALL");
+            break;
+        case TERRAIN_MASK_SWAMP:
+            console.log(2,"TERRAIN_MASK_SWAMP");
+            break;
+        case 0:
+            console.log(0,"NONE");
+            break;
+    }
+
     //17(17-23),19
 
     //建造指令

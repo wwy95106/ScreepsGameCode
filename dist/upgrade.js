@@ -10,13 +10,17 @@ let roleUpgeader = {
 
   creepEnergyType:0,
 
-  upgrade:function(creep){
+
+  /**
+   *  @param {Creep} creep 
+   *  @param {carryTotal} carryEnergyTotal 
+   * **/
+  upgrade:function(creep,carryTotal){
 
     //console.log(creep.memory.HarvsetEnergyType = 'a');
 
-    console.log('creep-upgrade:');
-    console.log('creep-name:' + creep.name," & energy :" + creep.store[RESOURCE_ENERGY]);
-    console.log("creep-ticksToLive:"+creep.ticksToLive);
+    //console.log('creep-upgrade:');
+    console.log('*Upgrade*' + creep.name ,"energy :" + creep.store[RESOURCE_ENERGY],'ticksToLive:'+creep.ticksToLive);
 
     let sources = creep.room.find(FIND_SOURCES);
 
@@ -27,26 +31,26 @@ let roleUpgeader = {
     //upgrade controller  x,y:38,40
     if(creepX === 38 && creepY === 40 && creep.store.getUsedCapacity() > 0){
       creep.upgradeController(creep.room.controller);
-      console.log('creep-upgrade : upgrade controller');
+      console.log('*Upgrade*' + creep.name + ' : upgrade controller(38,40)');
     }
 
     //harvest sources x,y:32,28
-    else if(creepX === 32 && creepY === 28 && creep.store.getUsedCapacity() < 50){
+    else if(creepX === 32 && creepY === 28 && creep.store.getUsedCapacity() < carryTotal){
       creep.harvest(sources[1])
-      console.log('creep-upgrade : harvest sources');
+      console.log('*Upgrade*' + creep.name + ' : harvest sources(32,28)');
     }
 
     //moveTo sources
     else if(creep.store.getUsedCapacity() === 0){
       creep.moveTo(32,28);
-      console.log('creep-upgrade : moveTo sources');
+      console.log('*Upgrade*' + creep.name + ' : moveTo sources(17,23)');
     }
 
     //moveTo controller
-    else if(creep.store.getUsedCapacity() === 50){
+    else if(creep.store.getUsedCapacity() === carryTotal){
       //creep.moveTo(creep.room.controller);
       creep.moveTo(38,40);
-      console.log('creep-upgrade : moveTo controller');
+      console.log('*Upgrade*' + creep.name + ' : moveTo controller(38,40)');
     }
     
 

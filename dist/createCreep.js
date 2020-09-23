@@ -16,16 +16,16 @@ let createCreep = {
     console.log('---Upgrader: ' + Upgrader.length);
 
 
-    if(Harvester.length < 1){
+    if(Harvester.length < 2){
 
-      let name = 'Harvester' + Game.time;
+      let name = 'Harvester_' + Game.time;
       this.create(name,'Harvester');
 
     }
 
     if(Upgrader.length < 1){
 
-      let name = 'Upgrader' + Game.time;
+      let name = 'Upgrader_' + Game.time;
       this.create(name,'Upgrader');
 
     }
@@ -34,10 +34,7 @@ let createCreep = {
   create:function(name,role){
 
     let spawn1 = Game.spawns['Spawn1'];
-    console.log('create-creep:');
-    console.log('creep-name:' + name);
-    console.log('creep-memory-role:' + role);
-    spawn1.spawnCreep([WORK,CARRY,MOVE], name,{memory: {role: role}});
+    spawn1.spawnCreep([WORK,WORK,CARRY,MOVE,MOVE], name,{memory: {role: role}});
 
   }
 }
