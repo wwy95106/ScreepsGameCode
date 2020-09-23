@@ -15,4 +15,8 @@ grunt
 start
 ```
 
-
+### CMD path
+```
+1)  d:   
+2) cd git/ScreepsGameCode
+```

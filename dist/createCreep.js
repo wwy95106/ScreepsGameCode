@@ -11,7 +11,7 @@ let createCreep = {
 
     let Harvester = _.filter(Game.creeps,(creep) => creep.memory.role === 'Harvester');
     let Upgrader = _.filter(Game.creeps,(creep) => creep.memory.role === 'Upgrader');
-    console.log('creep-msg:');
+    console.log('creep-number:');
     console.log('---Harvester: ' + Harvester.length);
     console.log('---Upgrader: ' + Upgrader.length);
 

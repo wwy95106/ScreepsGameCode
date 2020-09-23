@@ -14,8 +14,9 @@ Game.spawns['Spawn1'].room.controller.activateSafeMode();
 
 */
 
-
+//建造指令
 Game.spawns['Spawn1'].room.createConstructionSite( 23, 22, STRUCTURE_TOWER );
+Game.spawns['Spawn1'].room.createConstructionSite( 23, 22, STRUCTURE_EXTENSION );
 
 
 /*

@@ -163,31 +163,25 @@ module.exports.loop = function () {
 
     }
 
-    
+    //17(17-23),19
+
+    //建造指令
+     //Game.spawns['Spawn1'].room.createConstructionSite( 23, 22, STRUCTURE_EXTENSION );
+
+
+
+
+     
 }
 
 
 
-let roleHarvester = require('dist/harvest');
-let roleUpgrader = require('upgrade');
-let createCreep = require('dist/createCreep');
 
-module.exports.loop = function () {
 
-    createCreep.check();
 
-    for(let name in Game.creeps){
 
-        let creep = Game.creeps[name];
 
-        if(creep.memory.role === 'Harvester'){
-            roleHarvester.run(creep);
-        }
 
-        if(creep.memory.role === 'Upgrader'){
-            roleUpgrader.upgrade(creep);
-        }
 
-    }
-}
-//17(17-23),19
+
+
