@@ -11,8 +11,11 @@ let roleHarvest = {
 
   /** @param {Creep} creep **/
   run:function(creep){
-    //console.log(creep.name + 'is run');
-    //console.log(creep.memory);
+
+    console.log('creep-run:');
+    console.log('creep-name:' + creep.name," & energy :" + creep.store[RESOURCE_ENERGY]);
+    console.log("creep-ticksToLive:"+creep.ticksToLive);
+
     //harvest or transfer
     if(creep.store.getFreeCapacity()>0){
 

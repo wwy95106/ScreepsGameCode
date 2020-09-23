@@ -10,20 +10,27 @@ let roleUpgeader = {
 
   upgrade:function(creep){
 
+    console.log('creep-upgrade:');
+    console.log('creep-name:' + creep.name," & energy :" + creep.store[RESOURCE_ENERGY]);
+    console.log("creep-ticksToLive:"+creep.ticksToLive);
+
     let sources = creep.room.find(FIND_SOURCES);
 
     //upgrade controller
-    if(creep.store[RESOURCE_ENERGY] === 0){
+    if(creep.store[RESOURCE_ENERGY] == 0){
+
       //moveTo sources & harvest
       if(creep.harvest(sources[1]) === ERR_NOT_IN_RANGE) {
         creep.moveTo(sources[1]);
       }
 
     }else{
+
       //upgradeController
       if( creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE ) {
         creep.moveTo(creep.room.controller);
       }
+
     }
   }
 

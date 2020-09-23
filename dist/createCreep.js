@@ -11,9 +11,10 @@ let createCreep = {
 
     let Harvester = _.filter(Game.creeps,(creep) => creep.memory.role === 'Harvester');
     let Upgrader = _.filter(Game.creeps,(creep) => creep.memory.role === 'Upgrader');
+    console.log('creep-msg:');
+    console.log('---Harvester: ' + Harvester.length);
+    console.log('---Upgrader: ' + Upgrader.length);
 
-    console.log('Harvester: ' + Harvester.length);
-    console.log('Upgrader: ' + Upgrader.length);
 
     if(Harvester.length < 1){
 
@@ -33,6 +34,9 @@ let createCreep = {
   create:function(name,role){
 
     let spawn1 = Game.spawns['Spawn1'];
+    console.log('create-creep:');
+    console.log('creep-name:' + name);
+    console.log('creep-memory-role:' + role);
     spawn1.spawnCreep([WORK,CARRY,MOVE], name,{memory: {role: role}});
 
   }
