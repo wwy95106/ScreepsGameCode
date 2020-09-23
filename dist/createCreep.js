@@ -34,7 +34,7 @@ let createCreep = {
   create:function(name,role){
 
     let spawn1 = Game.spawns['Spawn1'];
-    spawn1.spawnCreep([WORK,WORK,CARRY,MOVE,MOVE], name,{memory: {role: role}});
+    spawn1.spawnCreep([WORK,CARRY,CARRY,MOVE,MOVE], name,{memory: {role: role}});
 
   }
 }
