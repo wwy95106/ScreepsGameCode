@@ -13,7 +13,7 @@ let roleUpgeader = {
     let sources = creep.room.find(FIND_SOURCES);
 
     //upgrade controller
-    if(creep.store.getUsedCapacity() < 50){
+    if(creep.store[RESOURCE_ENERGY] === 0){
       //moveTo sources & harvest
       if(creep.harvest(sources[1]) === ERR_NOT_IN_RANGE) {
         creep.moveTo(sources[1]);

@@ -168,9 +168,9 @@ module.exports.loop = function () {
 
 
 
-let roleHarvester = require('harvest');
+let roleHarvester = require('dist/harvest');
 let roleUpgrader = require('upgrade');
-let createCreep = require('createCreep');
+let createCreep = require('dist/createCreep');
 
 module.exports.loop = function () {
 
