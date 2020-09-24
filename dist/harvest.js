@@ -24,6 +24,8 @@ let roleHarvest = {
     const SourcesCollectionPoint1 = creep.room.lookForAt(LOOK_CREEPS, 17,23);
     const SourcesCollectionPoint2 = creep.room.lookForAt(LOOK_CREEPS, 17,24);
 
+    const UpgeadeControllerPoint1 = creep.room.lookForAt(LOOK_CREEPS, 38,41);
+    const UpgeadeControllerPoint2 = creep.room.lookForAt(LOOK_CREEPS, 38,42);
 
     let structures = creep.room.find(FIND_STRUCTURES);
 
@@ -67,10 +69,17 @@ let roleHarvest = {
       creep.harvest(sources[0])
       console.log('*Harvest*' + creep.name + ' : harvest sources(17,24)');
     }
-
-    else if(creepX === 38 && creepY === 40 && creep.store.getUsedCapacity() > 0){
+    
+    //upgrade controller x,y:38,41
+    else if(creepX === 38 && creepY === 41 && creep.store.getUsedCapacity() > 0){
       creep.upgradeController(creep.room.controller);
-      console.log('*Harvest*' + creep.name + ' : upgrade controller(38,40)');
+      console.log('*Harvest*' + creep.name + ' : upgrade controller(38,41)');
+    }
+
+    //upgrade controller x,y:38,42
+    else if(creepX === 38 && creepY === 41 && creep.store.getUsedCapacity() > 0){
+      creep.upgradeController(creep.room.controller);
+      console.log('*Harvest*' + creep.name + ' : upgrade controller(38,41)');
     }
     
     //moveTo sources
@@ -80,8 +89,6 @@ let roleHarvest = {
         creep.moveTo(17,23);
       }else if(SourcesCollectionPoint2.length === 0){
         creep.moveTo(17,24);
-      }else{
-        console.log('ERROR:foundSources1 != 0 && foundSources2 != 0')
       }
 
       console.log('*Harvest*' + creep.name + ' : moveTo sources');
@@ -121,7 +128,13 @@ let roleHarvest = {
       }
       //moveTo controller
       else{
-        creep.moveTo(creep.room.controller);
+
+        if(SourcesCollectionPoint1.length === 0) {
+          creep.moveTo(38,41);
+        }else if(SourcesCollectionPoint2.length === 0){
+          creep.moveTo(38,42);
+        }
+        
       }
 
     }

@@ -6,7 +6,6 @@ module.exports.loop = function () {
     console.log("-");
     console.log('---------'+Game.time+'---start------');
     
-    //safeMode tick & cooldown
     console.log("safeMode tick : " + Game.spawns['Spawn1'].room.controller.safeMode,"safeMode cooldown : " + Game.spawns['Spawn1'].room.controller.safeModeCooldown);
     
     //start safeMode
