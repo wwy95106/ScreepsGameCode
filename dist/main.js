@@ -29,18 +29,6 @@ module.exports.loop = function () {
         }
         carryTotal = 50 * num;
         console.log("creepCarryEneryTotal:"+carryTotal);
-
-        let structures = creep.room.find(FIND_STRUCTURES);
-        console.log(structures);
-        
-        for(let a=0;a<structures.length;a++){
-            console.log(structures[a].structureType);
-            if(structures[a].structureType === 'extension'){
-                console.log(structures[a].store[RESOURCE_ENERGY]);
-            }
-        }
-
-
         
 
         if(creep.memory.role === 'Harvester'){
