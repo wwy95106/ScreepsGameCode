@@ -128,10 +128,11 @@ let roleHarvest = {
       }
       //moveTo controller
       else{
-
-        if(SourcesCollectionPoint1.length === 0) {
+        if(UpgeadeControllerPoint1.length === 0) {
+          console.log('*Harvest*' + creep.name + ' : moveTo(38,41)');
           creep.moveTo(38,41);
-        }else if(SourcesCollectionPoint2.length === 0){
+        }else if(UpgeadeControllerPoint2.length === 0){
+          console.log('*Harvest*' + creep.name + ' : moveTo(38,42)');
           creep.moveTo(38,42);
         }
         

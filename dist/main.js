@@ -1,12 +1,14 @@
 let roleHarvester = require('harvest');
 let roleUpgrader = require('upgrade');
 let createCreep = require('createCreep');
+let testCode = require('testCode');
 
 module.exports.loop = function () {
     console.log("-");
     console.log('---------'+Game.time+'---start------');
     
     console.log("safeMode tick : " + Game.spawns['Spawn1'].room.controller.safeMode,"safeMode cooldown : " + Game.spawns['Spawn1'].room.controller.safeModeCooldown);
+    console.log("progress: " + Game.spawns['Spawn1'].room.controller.progress,"progressTotal: " + Game.spawns['Spawn1'].room.controller.progressTotal);
     
     //start safeMode
     if(Game.spawns['Spawn1'].room.controller.safeModeCooldown === undefined
@@ -39,6 +41,8 @@ module.exports.loop = function () {
         }
 
     }
+
+    testCode.testFunc();
 
     console.log('---------'+Game.time+'----end-----');
     console.log("-");

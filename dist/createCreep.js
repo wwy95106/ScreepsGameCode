@@ -11,9 +11,9 @@ let createCreep = {
     
     let Harvester = _.filter(Game.creeps,(creep) => creep.memory.role === 'Harvester');
     let Upgrader = _.filter(Game.creeps,(creep) => creep.memory.role === 'Upgrader');
-    console.log('creep-number:');
-    console.log('---Harvester: ' + Harvester.length);
-    console.log('---Upgrader: ' + Upgrader.length);
+    //console.log('creep-number:');
+    //console.log('---Harvester: ' + Harvester.length);
+    //console.log('---Upgrader: ' + Upgrader.length);
 
 
     if(Harvester.length < 3){

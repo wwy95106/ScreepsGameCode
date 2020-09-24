@@ -1,16 +1,18 @@
 let search = {
+    //room static terrain
+    TERRAIN : Game.map.getRoomTerrain(room),
     
-    
-    searchPos:function(x,y){
+    //all structures list
+    structures : creep.room.find(FIND_STRUCTURES),
 
+    getTargetPos:function(target){
+        
     },
     
     //search structures type 
-    searchStructuresType:function(type){
-
-        let structures = creep.room.find(FIND_STRUCTURES);
-
-        let structuresArr = [];
+    getStructuresType:function(type){
+         
+        let structuresList = [];
         
         for(let a=0;a<structures.length;a++){
             if(structures[a].structureType === type){
@@ -18,14 +20,14 @@ let search = {
             }
         }
 
-        return structuresArr;
+        return structuresList;
 
     },
 
     //room static terrain data
-    searchRoomTerrain:function(room,x,y){
-        const TERRAIN = Game.map.getRoomTerrain(room);
-        switch(TERRAIN.get(x,y)){
+    getRoomXyTerrain:function(room,x,y){
+        
+        switch(this.TERRAIN.get(x,y)){
             case TERRAIN_MASK_LAVA:
                 //wall
                 return "TERRAIN_MASK_WALL"
@@ -41,6 +43,10 @@ let search = {
             default:
                 return "undefined"
         }
-    }
+    },
+    
+    getTargetAroundXy:function(source){
+
+    },
     
 }
