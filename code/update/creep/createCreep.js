@@ -11,9 +11,9 @@ let createCreep = {
       
       let Harvester = _.filter(Game.creeps,(creep) => creep.memory.role === 'Harvester');
       let Upgrader = _.filter(Game.creeps,(creep) => creep.memory.role === 'Upgrader');
-      console.log('creep-number:');
-      console.log('---Harvester: ' + Harvester.length);
-      console.log('---Upgrader: ' + Upgrader.length);
+      //console.log('creep-number:');
+      //console.log('---Harvester: ' + Harvester.length);
+      //console.log('---Upgrader: ' + Upgrader.length);
   
   
       if(Harvester.length < 2){
@@ -31,11 +31,19 @@ let createCreep = {
       }
   
     },
+
+    // 1 part need 50 energy
+    // 5 work parts are enough
     create:function(name,role){
   
       let spawn1 = Game.spawns['Spawn1'];
       spawn1.spawnCreep([WORK,CARRY,CARRY,MOVE,MOVE], name,{memory: {role: role}});
   
     }
+
   }
-  module.exports = createCreep;
+
+
+module.exports = createCreep;
+
+

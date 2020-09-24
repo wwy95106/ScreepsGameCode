@@ -6,14 +6,14 @@
  * var mod = require('harvest');
  * mod.thing == 'a thing'; // true
  */
-
+/* 
 let roleHarvest = {
 
 
     /**
      *  @param {Creep} creep 
      *  @param {carryTotal} carryEnergyTotal 
-     * **/
+     * 
     run:function(creep,carryTotal){
   
       //console.log('**creep-Harvest:');
@@ -87,6 +87,11 @@ let roleHarvest = {
       }
   
     }
+  }
+
+ */
+  let roleHarvest = {
+    
   }
   //export module
   module.exports = roleHarvest;
