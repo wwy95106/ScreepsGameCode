@@ -9,6 +9,7 @@
 
 let roleHarvest = {
 
+
   /**
    *  @param {Creep} creep 
    *  @param {carryTotal} carryEnergyTotal 

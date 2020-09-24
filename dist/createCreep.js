@@ -8,7 +8,7 @@
  */
 let createCreep = {
   check:function(){
-
+    
     let Harvester = _.filter(Game.creeps,(creep) => creep.memory.role === 'Harvester');
     let Upgrader = _.filter(Game.creeps,(creep) => creep.memory.role === 'Upgrader');
     console.log('creep-number:');
