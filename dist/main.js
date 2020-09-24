@@ -3,6 +3,20 @@ let roleUpgrader = require('upgrade');
 let createCreep = require('createCreep');
 let testCode = require('testCode');
 
+
+/*
+
+Game.spawns['Spawn1'].room.createConstructionSite( 40, 10, STRUCTURE_EXTENSION );
+Game.spawns['Spawn1'].room.createConstructionSite( 41, 10, STRUCTURE_EXTENSION );
+Game.spawns['Spawn1'].room.createConstructionSite( 41, 11, STRUCTURE_EXTENSION );
+Game.spawns['Spawn1'].room.createConstructionSite( 28, 12, STRUCTURE_EXTENSION );
+Game.spawns['Spawn1'].room.createConstructionSite( 29, 12, STRUCTURE_EXTENSION );
+
+Game.spawns['Spawn1'].room.createConstructionSite( 37, 12, STRUCTURE_ROAD );
+
+*/
+
+
 module.exports.loop = function () {
     console.log("-");
     console.log('---------'+Game.time+'---start------');
@@ -11,10 +25,10 @@ module.exports.loop = function () {
     console.log("progress: " + Game.spawns['Spawn1'].room.controller.progress,"progressTotal: " + Game.spawns['Spawn1'].room.controller.progressTotal);
     
     //start safeMode
-    if(Game.spawns['Spawn1'].room.controller.safeModeCooldown === undefined
+    /* if(Game.spawns['Spawn1'].room.controller.safeModeCooldown === undefined
     && Game.spawns['Spawn1'].room.controller.safeMode === 0){
         Game.spawns['Spawn1'].room.controller.activateSafeMode();
-    }
+    } */
 
     createCreep.check()
 
@@ -33,16 +47,17 @@ module.exports.loop = function () {
         
 
         if(creep.memory.role === 'Harvester'){
-            roleHarvester.run(creep,carryTotal);
+            roleHarvester.harvest(creep,carryTotal,1);
         }
 
         if(creep.memory.role === 'Upgrader'){
-            roleUpgrader.upgrade(creep,carryTotal);
+            roleHarvester.harvest(creep,carryTotal,0);
+            //roleUpgrader.upgrade(creep,carryTotal,0);
         }
 
     }
 
-    testCode.testFunc();
+    //testCode.testFunc();
 
     console.log('---------'+Game.time+'----end-----');
     console.log("-");
