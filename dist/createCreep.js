@@ -73,7 +73,7 @@ let createCreep = {
       });
     }
     //RCL 1
-    else if(spawn1.room.energyAvailable > 300){
+    /* else if(spawn1.room.energyAvailable > 300){
       spawn1.spawnCreep([WORK,CARRY,CARRY,MOVE,MOVE], name,
         {
           memory: {
@@ -81,7 +81,7 @@ let createCreep = {
             energyStatus:'empty',
           }
       });
-    }
+    } */
     
 
   }

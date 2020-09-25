@@ -10,16 +10,17 @@
 let roleHarvest = {
 
   harvest:function(creep,carryTotal,sourcesNum){
-
+    //target
     let sources = creep.room.find(FIND_SOURCES);//sources
     let spawn1 = Game.spawns['Spawn1'];//spawn1
     let controller = creep.room.controller;//controller
-    let structures = creep.room.find(FIND_STRUCTURES);// find structrues
-    let targets = creep.room.find(FIND_CONSTRUCTION_SITES);//fing structrues sites
-    let structuresArr = [];
-    let emptyExtension = [];
-
+    let tower = creep.room.find(STRUCTURE_TOWER);//tower
     
+    let targets = creep.room.find(FIND_CONSTRUCTION_SITES);//find structrues sites
+    //extension
+    let structures = creep.room.find(FIND_STRUCTURES);// find structrues
+    let structuresArr = [];//extension arr
+    let emptyExtension = [];//empty exrension arr
     for(let a=0;a<structures.length;a++){
         if(structures[a].structureType === 'extension'){
             structuresArr.push(structures[a]);
@@ -31,8 +32,16 @@ let roleHarvest = {
       }
 
     }
+    /* let targets = creep.room.find(FIND_STRUCTURES, {
+      filter: (structure) => {
+          return (structure.structureType == STRUCTURE_EXTENSION ||
+                  structure.structureType == STRUCTURE_SPAWN ||
+                  structure.structureType == STRUCTURE_TOWER) && 
+                  structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+      }
+    }); */
 
-
+    console.log('*Harvest*' + creep.name," has :"+creep.store.getUsedCapacity() + " energy");
     
     if(creep.memory.energyStatus === 'empty'){
       console.log('*Harvest*' + creep.name + ' : harvest  sources');
@@ -74,6 +83,23 @@ let roleHarvest = {
           }
         }
         
+      }
+
+      //transfer tower
+      else if(tower.length != 0){
+        if(tower[0].store[RESOURCE_ENERGY] < 1000){
+          console.log('*Harvest*' + creep.name + ' : transfer tower');
+          //transfer tower
+          if( creep.transfer(tower[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE ) {
+            creep.moveTo(tower[0]);
+          }else{
+            if(creep.store.getUsedCapacity() === 0){
+              creep.memory.energyStatus = 'empty';
+              console.log('*Harvest*' + creep.name + ' : energyStatus  empty');
+            }
+          }
+          
+        }
       }
 
       //build target
