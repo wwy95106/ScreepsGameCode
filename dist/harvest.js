@@ -19,6 +19,7 @@ let roleHarvest = {
     let structuresArr = [];
     let emptyExtension = [];
 
+    
     for(let a=0;a<structures.length;a++){
         if(structures[a].structureType === 'extension'){
             structuresArr.push(structures[a]);

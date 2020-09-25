@@ -39,11 +39,11 @@ module.exports.loop = function () {
         let num = 0;
         for(let a=0;a<creep.body.length;a++){
             if(creep.body[a].type === 'carry'){
-                num++ ;
+                num++ ;//BODYPART_COST
             }
         }
         carryTotal = 50 * num;
-        console.log("creepCarryEneryTotal:"+carryTotal);
+        //console.log("creepCarryEneryTotal:"+carryTotal);
         
 
         if(creep.memory.role === 'Harvester'){
@@ -59,6 +59,10 @@ module.exports.loop = function () {
 
     //testCode.testFunc();
 
+    //console.log(Game.spawns['Spawn1'].pos.findClosestByRange());
+    //console.log(creep.pos.findClosestByRange(Game.spawns));
+
+    
     console.log('---------'+Game.time+'----end-----');
     console.log("-");
 

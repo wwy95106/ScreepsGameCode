@@ -3,11 +3,20 @@ let testCode = {
     testFunc : function(){
         
         //https://github.com/screeps/screeps.git
-        
-        
+
+
         console.log('----');
         console.log('----testCodeGo----');
         console.log('testCodeGo');
+
+
+        //find other creeps
+        //let otherScreeps = Game.spawns['Spawn1'].room.find(FIND_HOSTILE_CREEPS)
+
+        //other creeps obj
+        //otherScreeps[0];
+        //otherScreeps[0].name;
+        //Game.spawns['Spawn1'].pos.findClosestByRange(otherScreeps[0]);
         
         if(Memory.rooms.room1.harvestLocation.length === 0){
             this.setRoomData();

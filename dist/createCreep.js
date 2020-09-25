@@ -18,7 +18,7 @@ let createCreep = {
 
     //delete creeps(died) memory
     for(let name in Memory.creeps){
-      console.log(Game.creeps[name]);
+      //console.log(Game.creeps[name]);
       if(Game.creeps[name] === undefined){
           delete Memory.creeps[name];
       }
@@ -39,6 +39,14 @@ let createCreep = {
 
     }
     /*
+
+    FIND_HOSTILE_CREEPS other creeps
+
+    //find other creeps
+    
+
+
+
     if(Attack.length < 2){
 
       let name = 'Attack_' + Game.time;
@@ -50,13 +58,27 @@ let createCreep = {
   create:function(name,role){
 
     let spawn1 = Game.spawns['Spawn1'];
+    //energyAvailable
+    //console.log(spawn1.room.energyAvailable);
+    //console.log(spawn1.room.energyCapacityAvailable);
 
-    if(spawn1.store[RESOURCE_ENERGY] === 300){
+    //RCL 2 
+    if(spawn1.room.energyAvailable > 500){
+      spawn1.spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], name,
+        {
+          memory: {
+            role: role,
+            energyStatus:'empty',
+          }
+      });
+    }
+    //RCL 1
+    else if(spawn1.room.energyAvailable > 300){
       spawn1.spawnCreep([WORK,CARRY,CARRY,MOVE,MOVE], name,
         {
           memory: {
             role: role,
-            energyStatus:'empty'
+            energyStatus:'empty',
           }
       });
     }
