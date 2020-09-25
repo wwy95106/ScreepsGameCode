@@ -25,6 +25,9 @@ let roleHarvest = {
         if(structures[a].structureType === 'extension'){
             structuresArr.push(structures[a]);
         }
+        if(structures[a].structureType === 'tower'){
+          tower = structures[a];
+      }
     }
     for(let b=0;b<structuresArr.length;b++){
       if(structuresArr[b].store[RESOURCE_ENERGY] < 50){
@@ -32,6 +35,7 @@ let roleHarvest = {
       }
 
     }
+    
     /* let targets = creep.room.find(FIND_STRUCTURES, {
       filter: (structure) => {
           return (structure.structureType == STRUCTURE_EXTENSION ||
@@ -43,6 +47,7 @@ let roleHarvest = {
 
     console.log('*Harvest*' + creep.name," has :"+creep.store.getUsedCapacity() + " energy");
     
+    //harvest logic
     if(creep.memory.energyStatus === 'empty'){
       console.log('*Harvest*' + creep.name + ' : harvest  sources');
       if(creep.harvest(sources[sourcesNum]) === ERR_NOT_IN_RANGE){
@@ -54,7 +59,10 @@ let roleHarvest = {
         }
       }
 
-    }else if(creep.memory.energyStatus === 'full'){
+    }
+
+    //work logic
+    else if(creep.memory.energyStatus === 'full'){
 
       if(spawn1.store[RESOURCE_ENERGY] < 300){
         console.log('*Harvest*' + creep.name + ' : transfer spawns1');
@@ -86,20 +94,17 @@ let roleHarvest = {
       }
 
       //transfer tower
-      else if(tower.length != 0){
-        if(tower[0].store[RESOURCE_ENERGY] < 1000){
-          console.log('*Harvest*' + creep.name + ' : transfer tower');
+      else if(tower.store[RESOURCE_ENERGY] < 1000){
+        console.log('*Harvest*' + creep.name + ' : transfer tower');
           //transfer tower
-          if( creep.transfer(tower[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE ) {
-            creep.moveTo(tower[0]);
+          if( creep.transfer(tower, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE ) {
+            creep.moveTo(tower);
           }else{
             if(creep.store.getUsedCapacity() === 0){
               creep.memory.energyStatus = 'empty';
               console.log('*Harvest*' + creep.name + ' : energyStatus  empty');
             }
           }
-          
-        }
       }
 
       //build target

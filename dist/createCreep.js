@@ -62,8 +62,27 @@ let createCreep = {
     //console.log(spawn1.room.energyAvailable);
     //console.log(spawn1.room.energyCapacityAvailable);
 
+    //RCL 3 
+    /* if(spawn1.room.energyCapacityAvailable === 800){
+      spawn1.spawnCreep([WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], name,
+        {
+          memory: {
+            role: role,
+            energyStatus:'empty',
+          }
+      });
+    } */
+
+    spawn1.spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], name,
+      {
+        memory: {
+          role: role,
+          energyStatus:'empty',
+        }
+    });
+
     //RCL 2 
-    if(spawn1.room.energyAvailable > 500){
+    /* if(spawn1.room.energyCapacityAvailable === 550){
       spawn1.spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], name,
         {
           memory: {
@@ -71,9 +90,9 @@ let createCreep = {
             energyStatus:'empty',
           }
       });
-    }
+    } */
     //RCL 1
-    /* else if(spawn1.room.energyAvailable > 300){
+    /* else if(spawn1.room.energyCapacityAvailable === 300){
       spawn1.spawnCreep([WORK,CARRY,CARRY,MOVE,MOVE], name,
         {
           memory: {

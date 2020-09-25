@@ -18,12 +18,88 @@ let testCode = {
         //otherScreeps[0].name;
         //Game.spawns['Spawn1'].pos.findClosestByRange(otherScreeps[0]);
         
+        /* 
         if(Memory.rooms.room1.harvestLocation.length === 0){
             this.setRoomData();
-        }
+        } 
+        */
         
        //Memory.rooms;
-       console.log(Memory.rooms.room1.harvestLocation[0]);
+       //console.log(Memory.rooms.room1.harvestLocation[0]);
+
+
+       //this.checTask();
+    },
+
+    checTask:function(){
+        let spawn = Game.spawns['Spawn1'];//spawn [obj]
+        let source = spawn.room.find(FIND_SOURCES);//source [arr]
+
+        let structure = spawn.room.find(FIND_STRUCTURES);//structure [arr]  
+        let extension = this.getStructureObj(structure,STRUCTURE_EXTENSION);//extension [arr]
+
+        let structureSide = spawn.room.find(FIND_CONSTRUCTION_SITES);//structure sites [arr]
+
+        /* for(let obj in structure){
+            console.log(structure);
+        } */
+
+        //check structure side need build
+        
+        
+        
+        //check structure need energy
+
+        
+        
+        //check structure need repair
+
+        
+        
+        //check source harvesting position
+
+
+        //console.log("spawn : "+spawn);
+        //console.log("source : "+source);
+
+        //console.log("structure : "+structure);
+        //console.log("extension : "+extension);
+
+        //console.log("structure side : "+structureSide);
+        //console.log(this.getSourcesObj(spawn));
+
+
+
+    },
+
+    postTask:function(){
+
+
+
+
+
+    },
+
+    getTask:function(){
+
+
+
+
+    },
+    
+    //get structure obj [return arr]
+    /**
+     * @param {arr} arr 
+     * @param {structureType} structureType 
+     * */
+    getStructureObj:function(arr,structureType){
+        let targetsArr = [];
+        _.filter(arr,(target) => {
+            if(target.structureType === structureType){
+                targetsArr[target];
+            }
+        })
+        return targetsArr;
     },
 
     setRoomData:function(){
