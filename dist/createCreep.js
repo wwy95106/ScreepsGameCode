@@ -25,14 +25,14 @@ let createCreep = {
     }
 
 
-    if(Harvester.length < 3){
+    if(Harvester.length < 2){
 
       let name = 'Harvester_' + Game.time;
       this.create(name,'Harvester');
 
     }
      
-    if(Upgrader.length < 3){
+    if(Upgrader.length < 2){
 
       let name = 'Upgrader_' + Game.time;
       this.create(name,'Upgrader');
@@ -62,9 +62,9 @@ let createCreep = {
     //console.log(spawn1.room.energyAvailable);
     //console.log(spawn1.room.energyCapacityAvailable);
 
-    //RCL 3 
+    //RCL 3  800
     /* if(spawn1.room.energyCapacityAvailable === 800){
-      spawn1.spawnCreep([WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], name,
+      spawn1.spawnCreep([WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE], name,
         {
           memory: {
             role: role,
@@ -73,7 +73,7 @@ let createCreep = {
       });
     } */
 
-    spawn1.spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], name,
+    spawn1.spawnCreep([WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], name,
       {
         memory: {
           role: role,
@@ -81,26 +81,29 @@ let createCreep = {
         }
     });
 
-    //RCL 2 
-    /* if(spawn1.room.energyCapacityAvailable === 550){
-      spawn1.spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], name,
+    //RCL 2  550
+    /*
+    spawn1.spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], name,
         {
           memory: {
             role: role,
             energyStatus:'empty',
           }
       });
-    } */
-    //RCL 1
-    /* else if(spawn1.room.energyCapacityAvailable === 300){
-      spawn1.spawnCreep([WORK,CARRY,CARRY,MOVE,MOVE], name,
-        {
-          memory: {
-            role: role,
-            energyStatus:'empty',
-          }
-      });
-    } */
+    */
+
+
+
+    //RCL 1 300
+    /*
+    spawn1.spawnCreep([WORK,CARRY,CARRY,MOVE,MOVE], name,
+      {
+        memory: {
+          role: role,
+          energyStatus:'empty',
+        }
+    });
+    */
     
 
   }

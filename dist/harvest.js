@@ -15,6 +15,7 @@ let roleHarvest = {
     let spawn1 = Game.spawns['Spawn1'];//spawn1
     let controller = creep.room.controller;//controller
     let tower = creep.room.find(STRUCTURE_TOWER);//tower
+    let tombstone = creep.room.find(FIND_TOMBSTONES);//tombstone
     
     let targets = creep.room.find(FIND_CONSTRUCTION_SITES);//find structrues sites
     //extension
@@ -50,6 +51,19 @@ let roleHarvest = {
     //harvest logic
     if(creep.memory.energyStatus === 'empty'){
       console.log('*Harvest*' + creep.name + ' : harvest  sources');
+      
+      //withdraw tombstone
+      /* 
+      if(tombstone.length != 0){
+        console.log(tombstone[0]);
+        console.log(creep.withdraw(tombstone[0]));
+        if(creep.withdraw(tombstone[0])  === ERR_NOT_IN_RANGE ){
+          creep.moveTo(tombstone[0]);
+        }
+      } 
+      */
+
+      //harvest sources
       if(creep.harvest(sources[sourcesNum]) === ERR_NOT_IN_RANGE){
         creep.moveTo(sources[sourcesNum]);
       }else{
