@@ -16,45 +16,39 @@ let roleHarvest = {
     let controller = creep.room.controller;//controller
     let tombstone = creep.room.find(FIND_TOMBSTONES);//tombstone
     let targets = creep.room.find(FIND_CONSTRUCTION_SITES);//find structrues sites
-
-    //tower
-    let tower = [];
-    //extension
+    
+    //structrues
     let structures = creep.room.find(FIND_STRUCTURES);// find structrues
-    let structuresArr = [];//extension arr
-    let emptyExtension = [];//empty exrension arr
+    //tower arr
+    let tower = [];//find tower
+    //extension arr
+    let structuresArr = [];//find extension
+    //empty exrension arr
+    let emptyExtension = [];// empty extension
     
     
     for(let a=0;a<structures.length;a++){
-        if(structures[a].structureType === 'extension'){
-            structuresArr.push(structures[a]);
+      //find extension
+      if(structures[a].structureType === 'extension'){
+          structuresArr.push(structures[a]);
+      }
+      //find tower
+      if(structures[a].structureType === 'tower'){
+        tower.push(structures[a]);
+        //empty tower
+        if(structures[a].store[RESOURCE_ENERGY] < 1000){
+          console.log(structures[a]);
         }
-        if(structures[a].structureType === 'tower'){
-          tower.push(structures[a]);
-
-          if(structures[a].store[RESOURCE_ENERGY] < 1000){
-            console.log(structures[a])
-          }
-
       }
     }
-    //console.log('tower:',tower);
     
+
+    //empty extension
     for(let b=0;b<structuresArr.length;b++){
       if(structuresArr[b].store[RESOURCE_ENERGY] < 50){
         emptyExtension.push(structuresArr[b]);
       }
-
     }
-    
-    /* let targets = creep.room.find(FIND_STRUCTURES, {
-      filter: (structure) => {
-          return (structure.structureType == STRUCTURE_EXTENSION ||
-                  structure.structureType == STRUCTURE_SPAWN ||
-                  structure.structureType == STRUCTURE_TOWER) && 
-                  structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
-      }
-    }); */
 
     console.log('*Harvest*' + creep.name," has :"+creep.store.getUsedCapacity() + " energy");
     
@@ -62,17 +56,6 @@ let roleHarvest = {
     if(creep.memory.energyStatus === 'empty'){
       console.log('*Harvest*' + creep.name + ' : harvest  sources');
       
-      //withdraw tombstone
-      /* 
-      if(tombstone.length != 0){
-        console.log(tombstone[0]);
-        console.log(creep.withdraw(tombstone[0]));
-        if(creep.withdraw(tombstone[0])  === ERR_NOT_IN_RANGE ){
-          creep.moveTo(tombstone[0]);
-        }
-      } 
-      */
-
       //harvest sources
       if(creep.harvest(sources[sourcesNum]) === ERR_NOT_IN_RANGE){
         creep.moveTo(sources[sourcesNum]);
