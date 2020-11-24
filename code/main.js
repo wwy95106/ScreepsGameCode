@@ -34,8 +34,14 @@ Game.spawns['Spawn1'].room.createConstructionSite( 33, 7, STRUCTURE_EXTENSION );
 
 
 Game.spawns['Spawn1'].room.createConstructionSite( 30, 12, STRUCTURE_TOWER );
+Game.spawns['Spawn1'].room.createConstructionSite( 27, 11, STRUCTURE_TOWER );
+Game.spawns['Spawn1'].room.createConstructionSite( 27, 8, STRUCTURE_TOWER );
 
 
+Game.spawns['Spawn1'].room.createConstructionSite(30,15,STRUCTURE_EXTRACTOR);
+ERR_INVALID_TARGET
+invalid
+target
 
 
 

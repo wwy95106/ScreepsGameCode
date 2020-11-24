@@ -14,22 +14,32 @@ let roleHarvest = {
     let sources = creep.room.find(FIND_SOURCES);//sources
     let spawn1 = Game.spawns['Spawn1'];//spawn1
     let controller = creep.room.controller;//controller
-    let tower = creep.room.find(STRUCTURE_TOWER);//tower
     let tombstone = creep.room.find(FIND_TOMBSTONES);//tombstone
-    
     let targets = creep.room.find(FIND_CONSTRUCTION_SITES);//find structrues sites
+
+    //tower
+    let tower = [];
     //extension
     let structures = creep.room.find(FIND_STRUCTURES);// find structrues
     let structuresArr = [];//extension arr
     let emptyExtension = [];//empty exrension arr
+    
+    
     for(let a=0;a<structures.length;a++){
         if(structures[a].structureType === 'extension'){
             structuresArr.push(structures[a]);
         }
         if(structures[a].structureType === 'tower'){
-          tower = structures[a];
+          tower.push(structures[a]);
+
+          if(structures[a].store[RESOURCE_ENERGY] < 1000){
+            console.log(structures[a])
+          }
+
       }
     }
+    //console.log('tower:',tower);
+    
     for(let b=0;b<structuresArr.length;b++){
       if(structuresArr[b].store[RESOURCE_ENERGY] < 50){
         emptyExtension.push(structuresArr[b]);
@@ -107,12 +117,26 @@ let roleHarvest = {
         
       }
 
-      //transfer tower
-      else if(tower.store[RESOURCE_ENERGY] < 1000){
+      //transfer tower[0]
+      else if(tower[0].store[RESOURCE_ENERGY] < 1000){
         console.log('*Harvest*' + creep.name + ' : transfer tower');
           //transfer tower
-          if( creep.transfer(tower, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE ) {
-            creep.moveTo(tower);
+          if( creep.transfer(tower[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE ) {
+            creep.moveTo(tower[0]);
+          }else{
+            if(creep.store.getUsedCapacity() === 0){
+              creep.memory.energyStatus = 'empty';
+              console.log('*Harvest*' + creep.name + ' : energyStatus  empty');
+            }
+          }
+      }
+
+      //transfer tower[1]
+      else if(tower[1].store[RESOURCE_ENERGY] < 1000){
+        console.log('*Harvest*' + creep.name + ' : transfer tower');
+          //transfer tower
+          if( creep.transfer(tower[1], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE ) {
+            creep.moveTo(tower[1]);
           }else{
             if(creep.store.getUsedCapacity() === 0){
               creep.memory.energyStatus = 'empty';

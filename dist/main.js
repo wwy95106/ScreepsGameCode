@@ -5,58 +5,6 @@ let towerLogic = require('tower');
 let testCode = require('testCode');
 
 
-/*
-
-Game.spawns['Spawn1'].room.createConstructionSite( 40, 10, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 41, 10, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 41, 11, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 28, 12, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 29, 12, STRUCTURE_EXTENSION );
-
-Game.spawns['Spawn1'].room.createConstructionSite( 28, 10, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 29, 10, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 32, 10, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 33, 10, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 34, 10, STRUCTURE_EXTENSION );
-
-
-Game.spawns['Spawn1'].room.createConstructionSite( 28, 9, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 29, 9, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 30, 9, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 32, 9, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 33, 9, STRUCTURE_EXTENSION );
-
-Game.spawns['Spawn1'].room.createConstructionSite( 30, 7, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 32, 6, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 32, 7, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 33, 6, STRUCTURE_EXTENSION );
-Game.spawns['Spawn1'].room.createConstructionSite( 33, 7, STRUCTURE_EXTENSION );
-
-
-Game.spawns['Spawn1'].room.createConstructionSite( 30, 12, STRUCTURE_TOWER );
-
-
-
-
-
-
-for(let a=4;a<14;a++){
-    Game.spawns['Spawn1'].room.createConstructionSite( 31, a, STRUCTURE_ROAD );
-}
-
-for(let a=28;a<39;a++){
-    Game.spawns['Spawn1'].room.createConstructionSite( a, 11, STRUCTURE_ROAD );
-}
-
-for(let a=29;a<32;a++){
-    Game.spawns['Spawn1'].room.createConstructionSite( a, 14, STRUCTURE_ROAD );
-}
-
-for(let a=28;a<34;a++){
-    Game.spawns['Spawn1'].room.createConstructionSite( a, 8, STRUCTURE_ROAD );
-}
-*/
-
 
 module.exports.loop = function () {
     console.log("-");
