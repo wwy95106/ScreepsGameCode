@@ -22,6 +22,7 @@ let roleHarvest = {
     let structures = creep.room.find(FIND_STRUCTURES);// find structrues
     let structuresArr = [];//extension arr
     let emptyExtension = [];//empty exrension arr
+    
     for(let a=0;a<structures.length;a++){
         if(structures[a].structureType === 'extension'){
             structuresArr.push(structures[a]);
@@ -30,6 +31,7 @@ let roleHarvest = {
           tower = structures[a];
       }
     }
+    
     for(let b=0;b<structuresArr.length;b++){
       if(structuresArr[b].store[RESOURCE_ENERGY] < 50){
         emptyExtension.push(structuresArr[b]);
