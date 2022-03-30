@@ -1,43 +1,67 @@
 /* 
-let roleHarvester = require('harvest');
 let roleUpgrader = require('upgrade');
-let createCreep = require('createCreep');
 let towerLogic = require('tower');
-let testCode = require('testCode');
+*/
 
 
- */
+/* 
+控制台输出用户、房间等基本信息
+
+*/
+const basicInfo = require("./basicInfo");
+
+/* 
+检测以及调用各种任务的执行方法
+
+*/
+const mession = require("mession");
+
+/* 
+内存操作
+
+*/
+let memory = require("memory");
+
+/* 
+创建creep
+
+*/
+let createCreep = require('createCreep');
+
+
+
+/* 
+采集
+
+*/
+let harvest = require('harvest');
+
 module.exports.loop = function () {
+    
     console.log("-");
     console.log('---------' + Game.time + '---start------');
 
-    console.log("safeMode tick : " + Game.spawns['Spawn1'].room.controller.safeMode, "safeMode cooldown : " + Game.spawns['Spawn1'].room.controller.safeModeCooldown);
+    //基本信息
+    let bi = new basicInfo("Spawn1");
+    //bi.userBasicInfo();
+    bi.RoomBasicInfo();
 
-    console.log("ticksToDowngrade tick : " + Game.spawns['Spawn1'].room.controller.ticksToDowngrade);
+    //任务
+    let mes = new mession("Spawn1");
+    //mes.checkEnergy();
 
-    console.log("progress: " + Game.spawns['Spawn1'].room.controller.progress, "progressTotal: " + Game.spawns['Spawn1'].room.controller.progressTotal);
-
-    console.log("spawn1 energy : " + Game.spawns['Spawn1'].room.energyAvailable);
-
-    //start safeMode
-    /* if(Game.spawns['Spawn1'].room.controller.safeModeCooldown === undefined
-    && Game.spawns['Spawn1'].room.controller.safeMode === 0){
-        Game.spawns['Spawn1'].room.controller.activateSafeMode();
-    } */
-    //console.log(Game.spawns['Spawn1'].room.createConstructionSite( 30, 12, STRUCTURE_TOWER ));
-    //createCreep.check();
-
-    let myCreeps = Game.spawns['Spawn1'].room.find(FIND_MY_CREEPS).length;
-
+    
     let spawn = Game.spawns['Spawn1'];
-
     let controller = spawn.room.controller;
+    let myCreeps = spawn.room.find(FIND_MY_CREEPS).length;
 
-    if (myCreeps < 2 && spawn.store[RESOURCE_ENERGY] == 250) {
+    if (myCreeps < 2 && spawn.store[RESOURCE_ENERGY] == 300) {
 
-        let creepName = 'Harvester' + (myCreeps + 1);
+        let creepName = "harvester" + '_' + Game.time;
 
-        spawn.spawnCreep([WORK, CARRY, MOVE, MOVE], creepName);
+        spawn.spawnCreep([WORK,CARRY,CARRY,MOVE,MOVE], creepName,{
+            memory: { role: "harvester", }
+          });
 
     } else {
 
@@ -84,5 +108,4 @@ module.exports.loop = function () {
 
     console.log('---------' + Game.time + '----end-----');
     console.log("-");
-
-}
+};

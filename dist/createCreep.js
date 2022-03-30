@@ -1,111 +1,44 @@
-/*
- * Module code goes here. Use 'module.exports' to export things:
- * module.exports.thing = 'a thing';
- *
- * You can import it from another modules like this:
- * var mod = require('createCreep');
- * mod.thing == 'a thing'; // true
- */
+/* 
+创建creep
+
+option = {type,level,totalEngery}
+
+*/
 let createCreep = {
-  check:function(){
-    
-    let Harvester = _.filter(Game.creeps,(creep) => creep.memory.role === "Harvester");
-    let Upgrader = _.filter(Game.creeps,(creep) => creep.memory.role === "Upgrader");
-    //let Attack = _.filter(Game.creeps,(creep) => creep.memory.role = "Attack");
-    //console.log('creep-number:');
-    console.log('---Harvester: ' + Harvester.length);
-    console.log('---Upgrader: ' + Upgrader.length);
 
-    //delete creeps(died) memory
-    for(let name in Memory.creeps){
-      //console.log(Game.creeps[name]);
-      if(Game.creeps[name] === undefined){
-          delete Memory.creeps[name];
-      }
-    }
+  //创建新creep
+  createCreepHarvester: option => {
 
+    if (!option) { console.log("createCreepHarvester option error", option); return; };
 
-    if(Harvester.length < 2){
+    let creepBody = createCreep.getCreepBody(option);
 
-      let name = 'Harvester_' + Game.time;
-      this.create(name,'Harvester');
+    let creepName = option.type + '_' + Game.time;
 
-    }
-     
-    if(Upgrader.length < 2){
+    let memory = {
+      memory: { role: option.type, }
+    };
 
-      let name = 'Upgrader_' + Game.time;
-      this.create(name,'Upgrader');
-
-    }
-    /*
-
-    FIND_HOSTILE_CREEPS other creeps
-
-    //find other creeps
-    
-
-
-
-    if(Attack.length < 2){
-
-      let name = 'Attack_' + Game.time;
-      this.create(name,'Attack');
-
-    } */
-
+    spawn.spawnCreep(creepBody, creepName, memory);
   },
-  create:function(name,role){
 
-    let spawn1 = Game.spawns['Spawn1'];
-    //energyAvailable
-    //console.log(spawn1.room.energyAvailable);
-    //console.log(spawn1.room.energyCapacityAvailable);
+  //根据控制器等级和能量上限配置creep body
+  getCreepBody: (option) => {
 
-    //RCL 3  800
-    /* if(spawn1.room.energyCapacityAvailable === 800){
-      spawn1.spawnCreep([WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE], name,
-        {
-          memory: {
-            role: role,
-            energyStatus:'empty',
-          }
-      });
-    } */
+    switch (option.type) {
+      case "harvester":
+        break;
+      case "upgrader":
+        break;
+    }
 
-    spawn1.spawnCreep([WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], name,
-      {
-        memory: {
-          role: role,
-          energyStatus:'empty',
-        }
-    });
+    return [WORK, CARRY, CARRY, MOVE, MOVE];
+  },
 
-    //RCL 2  550
-    /*
-    spawn1.spawnCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], name,
-        {
-          memory: {
-            role: role,
-            energyStatus:'empty',
-          }
-      });
-    */
+  //获取creep可承载最大能量值
+  getMaxStoreFreeCapacity: (creep) => {
 
-
-
-    //RCL 1 300
-    /*
-    spawn1.spawnCreep([WORK,CARRY,CARRY,MOVE,MOVE], name,
-      {
-        memory: {
-          role: role,
-          energyStatus:'empty',
-        }
-    });
-    */
-    
-
+    return creep.getActiveBodyparts(WORK) * 50;
   }
 }
 module.exports = createCreep;
