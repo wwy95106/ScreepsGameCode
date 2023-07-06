@@ -41,6 +41,12 @@ module.exports.loop = function () {
     console.log("-");
     console.log('---------' + Game.time + '---start------');
 
+    // spawns
+    for(const index in Game.spawns) {
+        console.log(Game.spawns[index]);
+    };
+
+
     //基本信息
     let bi = new basicInfo("Spawn1");
     //bi.userBasicInfo();
