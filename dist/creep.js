@@ -21,9 +21,6 @@ let creep = {
             if(creeps.memory.energyStatus === "full"){
 
 
-
-
-
                 creeps.memory.energyStatus = "empty";
             }
 
