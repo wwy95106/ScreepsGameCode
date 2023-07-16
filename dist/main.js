@@ -6,6 +6,7 @@ let roleHarvester = require('roleHarvester');
 
 // 升级
 let roleUpgrader = require('roleUpgrader');
+
 // 升级
 let createCreeps = require('createCreep');
 
@@ -17,7 +18,15 @@ module.exports.loop = function () {
     // 基础信息 对象
     const basicInfo = new INFO_OBJECT('Spawn1');
 
-    const { controllerProgress, controllerProgressTotal, ticksToDowngrade, energyAvailable, myCreeps } = basicInfo.RoomBasicInfo();
+    // 房间 信息汇总
+    const {
+        controllerLevel,// 控制器等级
+        controllerProgress, // 升级进度
+        controllerProgressTotal, // 升级总需求
+        ticksToDowngrade, // controller 距离摧毁还有多久
+        energyAvailable, // 总可用能源
+        myCreeps // 所有 creeps 总数
+    } = basicInfo.getRoomBasicInfo();
 
     //控制器升级进度progress / 控制器升级所需总量progressTotal
     console.log("controller progress: " + controllerProgress + "/" + controllerProgressTotal);
@@ -29,18 +38,23 @@ module.exports.loop = function () {
     console.log("my creeps:" + myCreeps);
 
     // creep 状态 包含 list total
-    const { total, list } = basicInfo.getCreepsState();
+    let { creepsTotal, creepsList } = basicInfo.getCreepsState();
 
+
+    console.log("执行创建函数")
     // 创建 creep
-    if (total < 3) {
-        createCreeps.run(total, list);
-    };
+    createCreeps.run(creepsTotal, creepsList, energyAvailable);
 
+    console.log("执行工作函数")
     // 工作
-    for (var name in Game.creeps) {
-        var creep = Game.creeps[name];
+    for (let name in Game.creeps) {
+
+        let creep = Game.creeps[name];
+
+        console.log(creep.memory.role);
+
         if (creep.memory.role == 'harvester') {
-            roleHarvester.run(creep, total, list, energyAvailable);
+            roleHarvester.run(creep, creepsTotal, creepsList, energyAvailable);
         }
         if (creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);
@@ -50,36 +64,3 @@ module.exports.loop = function () {
     console.log('---------' + Game.time + '----end-----');
     console.log("-");
 };
-
-
-/*
-let roleUpgrader = require('upgrade');
-let towerLogic = require('tower');
-*/
-
-
-/*
-检测以及调用各种任务的执行方法
-
-*/
-// const mession = require("mession");
-
-/*
-内存操作
-
-*/
-// let memory = require("memory");
-
-/*
-创建creep
-
-*/
-// let createCreep = require('createCreep');
-
-
-
-/*
-采集
-
-*/
-// let harvest = require('harvest');

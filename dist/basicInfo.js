@@ -3,21 +3,40 @@
  * @param {spawnName} spawnName
  * */
 let basicInfo = function(spawnName){
-    this.spawn = Game.spawns[spawnName];
-    this.myCreeps = this.spawn.room.find(FIND_MY_CREEPS).length;
 
-    // console.log(FIND_MY_CREEPS);
-    // console.log(this.spawn.room.find(FIND_MY_CREEPS));
+    // console.log(Object.keys(Memory.creeps).length);
+
+    // 当前房间的 spawn
+    this.spawn = Game.spawns[spawnName];
+
+    //房间
+    this.room = this.spawn.room;
+    // console.log("room",this.room);
+
+    // 控制器
+    this.controller = this.room.controller;
+    // console.log("controller",this.controller);
+
+    // 当前房间的 creeps
+    this.myCreeps = this.spawn.room.find(FIND_MY_CREEPS).length;
+};
+
+// 获取 创建 creep 时，需要的信息
+basicInfo.prototype.getCreateInfo = function () {
+
 };
 
 //房间基本信息
-basicInfo.prototype.RoomBasicInfo = function () {
+basicInfo.prototype.getRoomBasicInfo = function () {
+
+    console.log(this.spawn.room.controller.level);
 
     return {
-        controllerProgress:this.spawn.room.controller.progress,
-        controllerProgressTotal:this.spawn.room.controller.progressTotal,
-        ticksToDowngrade:this.spawn.room.controller.ticksToDowngrade,
-        energyAvailable:this.spawn.room.energyAvailable,
+        controllerLevel:this.controller.level,
+        controllerProgress:this.controller.progress,
+        controllerProgressTotal:this.controller.progressTotal,
+        ticksToDowngrade:this.controller.ticksToDowngrade,
+        energyAvailable:this.room.energyAvailable,
         myCreeps:this.myCreeps
     }
 };
