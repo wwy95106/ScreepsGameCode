@@ -41,17 +41,16 @@ module.exports.loop = function () {
     let { creepsTotal, creepsList } = basicInfo.getCreepsState();
 
 
-    console.log("执行创建函数")
+    // console.log("执行创建函数")
     // 创建 creep
     createCreeps.run(creepsTotal, creepsList, energyAvailable);
 
-    console.log("执行工作函数")
+    // console.log("执行工作函数")
     // 工作
     for (let name in Game.creeps) {
 
         let creep = Game.creeps[name];
-
-        console.log(creep.memory.role);
+        // console.log(creep.memory.role);
 
         if (creep.memory.role == 'harvester') {
             roleHarvester.run(creep, creepsTotal, creepsList, energyAvailable);

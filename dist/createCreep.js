@@ -34,9 +34,9 @@ let createCreeps = {
         };
 
         // 返回 类型
-        if (type_harvester < 6) {
+        if (type_harvester < 7) {
             return "harvester"; // 采集
-        } else if (type_upgrader < 3) {
+        } else if (type_upgrader < 2) {
             return "upgrader"; // 升级
         } else {
             return false; // 不建造
@@ -52,10 +52,10 @@ let createCreeps = {
         for (const index in creepsList) {
             switch (creepsTotal[index].memory.target) {
                 case 0:
-                    source0++;
+                    source0 ++;
                     break;
                 case 1:
-                    source1++;
+                    source1 ++;
                     break;
             };
         };
@@ -78,11 +78,11 @@ let createCreeps = {
         // console.log("energyAvailable",energyAvailable);
 
 
-        if (creepType && energyAvailable >= 300) {
+        if (creepType && energyAvailable >= 250) {
             let creepName = creepType + Game.time;
-            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, CARRY, MOVE, MOVE], creepName);
+            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], creepName);
             Game.creeps[creepName].memory.role = creepType;
-            Game.creeps[creepName].memory.max = 100;
+            // Game.creeps[creepName].memory.max = 100;
             Game.creeps[creepName].memory.nextTarget = "harveste";
 
             switch (creepTarget) {
