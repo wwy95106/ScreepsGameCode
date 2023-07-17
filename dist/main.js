@@ -38,7 +38,7 @@ module.exports.loop = function () {
     console.log("my creeps:" + myCreeps);
 
     // creep 状态 包含 list total
-    let { creepsTotal, creepsList } = basicInfo.getCreepsState();
+    // let { creepsTotal, creepsList } = basicInfo.getCreepsState();
 
 
     // console.log("执行创建函数")
