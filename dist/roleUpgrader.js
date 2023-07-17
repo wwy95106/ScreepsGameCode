@@ -1,19 +1,23 @@
+// role root
+let roleRoot = require("role.root");
+
+// 升级者 逻辑
 var roleUpgrader = {
 
-    /** @param {Creep} creep **/
+    /** 
+     * run
+     * @param {Creep} creep 
+     * **/
     run: function (creep) {
-        if (creep.store[RESOURCE_ENERGY] == 0) {
-            var sources = creep.room.find(FIND_SOURCES);
-            if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0]);
-            }
-        }
-        else {
-            if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(creep.room.controller);
-            }
-        }
-    }
+        const creepState = roleRoot.getCreepState(creep);
+        if (creepState === "harveste") {
+            // 采集
+            roleRoot.toDoHarveste(creep);
+        } else if (creepState === "work") {
+            // 升级 控制器
+            roleRoot.toDoUpdate(creep);
+        };
+    },
 };
 
 module.exports = roleUpgrader;

@@ -5,8 +5,6 @@ let createCreeps = {
 
     /** 
      * 获取 screep 类型
-     * @param {creepsTotal} 总数
-     * @param {creepsList} 详细列表
      */
     getCreepType: function () {
 
@@ -32,9 +30,9 @@ let createCreeps = {
             };
         };
 
-        console.log("采集",type_harvester);
-        console.log("更新",type_upgrader);
-        console.log("其他",type_other);
+        console.log("采集", type_harvester);
+        console.log("更新", type_upgrader);
+        console.log("其他", type_other);
 
         // 提醒
         if (type_other) {
@@ -52,6 +50,9 @@ let createCreeps = {
 
     },
 
+    /** 
+     * 获取 screep 目标
+     */
     getCreepTarget() {
         let source0 = 0; // 采集点1 人数
         let source1 = 0; // 升级点2 人数
@@ -72,12 +73,12 @@ let createCreeps = {
             };
         };
 
-        console.log("source0:",source0);
-        console.log("source1:",source1);
+        console.log("source0:", source0);
+        console.log("source1:", source1);
 
         if (source0 < 4) {
             return 0;
-        } else if(source1 < 4){
+        } else if (source1 < 4) {
             return 1;
         };
     },
@@ -88,8 +89,8 @@ let createCreeps = {
         const creepType = this.getCreepType();
         const creepTarget = this.getCreepTarget();
 
-        console.log("creepType:",creepType);
-        console.log("creepTarget",creepTarget);
+        // console.log("creepType:",creepType);
+        // console.log("creepTarget",creepTarget);
         // console.log("energyAvailable",energyAvailable);
 
 
@@ -110,6 +111,8 @@ let createCreeps = {
             }
 
         };
+
+        // console.log("create End");
     }
 };
 
