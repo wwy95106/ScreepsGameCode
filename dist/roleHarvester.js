@@ -52,23 +52,25 @@ let roleHarvester = {
 
             // 采集
             if (creep.harvest(sources[creep.memory.target]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[creep.memory.target], {visualizePathStyle: {stroke: '#ffaa00'}});
+                creep.moveTo(sources[creep.memory.target], { visualizePathStyle: { stroke: '#ffaa00' } });
             }
 
         } else if (screepState === "work") {
 
+            // console.log("work energyAvailable", energyAvailable);
+            
             if (energyAvailable === 300) {
 
                 if (creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                     // 升级 控制器
-                    creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
+                    creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#ffffff' } });
 
                 };
             } else {
 
                 if (creep.transfer(Game.spawns['Spawn1'], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     // 存储在 spawn
-                    creep.moveTo(Game.spawns['Spawn1'], {visualizePathStyle: {stroke: '#ffaa00'}});
+                    creep.moveTo(Game.spawns['Spawn1'], { visualizePathStyle: { stroke: '#ffaa00' } });
                 };
 
             }

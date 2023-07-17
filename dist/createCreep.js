@@ -8,15 +8,19 @@ let createCreeps = {
      * @param {creepsTotal} 总数
      * @param {creepsList} 详细列表
      */
-    getCreepType: function (creepsTotal, creepsList) {
+    getCreepType: function () {
 
         let type_harvester = 0; // 采集 人数
         let type_upgrader = 0; // 升级 人数
         let type_other = 0; // 未分类 人数
 
         // 检测 现有类型
-        for (const index in creepsList) {
-            switch (creepsTotal[index].memory.role) {
+        for (let name in Game.creeps) {
+
+            let creep = Game.creeps[name];
+            // console.log(creep.memory.role);
+
+            switch (creep.memory.role) {
                 case "harvester":
                     type_harvester++;
                     break;
@@ -27,6 +31,10 @@ let createCreeps = {
                     type_other++;
             };
         };
+
+        console.log("采集",type_harvester);
+        console.log("更新",type_upgrader);
+        console.log("其他",type_other);
 
         // 提醒
         if (type_other) {
@@ -49,16 +57,23 @@ let createCreeps = {
         let source1 = 0; // 升级点2 人数
 
         // 检测 现有类型
-        for (const index in creepsList) {
-            switch (creepsTotal[index].memory.target) {
+        for (let name in Game.creeps) {
+
+            let creep = Game.creeps[name];
+            // console.log(creep.memory.role);
+
+            switch (creep.memory.target) {
                 case 0:
-                    source0 ++;
+                    source0++;
                     break;
                 case 1:
-                    source1 ++;
+                    source1++;
                     break;
             };
         };
+
+        console.log("source0:",source0);
+        console.log("source1:",source1);
 
         if (source0 < 4) {
             return 0;
@@ -70,10 +85,10 @@ let createCreeps = {
     // 运行
     run: function (creepsTotal, creepsList, energyAvailable) {
 
-        const creepType = this.getCreepType(creepsTotal, creepsList);
+        const creepType = this.getCreepType();
         const creepTarget = this.getCreepTarget(creepsList);
 
-        // console.log("creepType",creepType);
+        console.log("creepType:",creepType);
         // console.log("creepTarget",creepTarget);
         // console.log("energyAvailable",energyAvailable);
 

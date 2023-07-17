@@ -45,7 +45,8 @@ module.exports.loop = function () {
     // 创建 creep
     createCreeps.run(creepsTotal, creepsList, energyAvailable);
 
-    // console.log("执行工作函数")
+    // console.log("执行工作函数",energyAvailable);
+
     // 工作
     for (let name in Game.creeps) {
 
@@ -53,7 +54,7 @@ module.exports.loop = function () {
         // console.log(creep.memory.role);
 
         if (creep.memory.role == 'harvester') {
-            roleHarvester.run(creep, creepsTotal, creepsList, energyAvailable);
+            roleHarvester.run(creep, energyAvailable);
         }
         if (creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);
