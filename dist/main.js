@@ -43,7 +43,7 @@ module.exports.loop = function () {
 
     // console.log("执行创建函数")
     // 创建 creep
-    createCreeps.run(creepsTotal, creepsList, energyAvailable);
+    createCreeps.run(energyAvailable);
 
     // console.log("执行工作函数",energyAvailable);
 

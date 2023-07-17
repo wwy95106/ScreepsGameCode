@@ -52,7 +52,7 @@ let createCreeps = {
 
     },
 
-    getCreepTarget(creepsList) {
+    getCreepTarget() {
         let source0 = 0; // 采集点1 人数
         let source1 = 0; // 升级点2 人数
 
@@ -77,19 +77,19 @@ let createCreeps = {
 
         if (source0 < 4) {
             return 0;
-        } else {
+        } else if(source1 < 4){
             return 1;
         };
     },
 
     // 运行
-    run: function (creepsTotal, creepsList, energyAvailable) {
+    run: function (energyAvailable) {
 
         const creepType = this.getCreepType();
-        const creepTarget = this.getCreepTarget(creepsList);
+        const creepTarget = this.getCreepTarget();
 
         console.log("creepType:",creepType);
-        // console.log("creepTarget",creepTarget);
+        console.log("creepTarget",creepTarget);
         // console.log("energyAvailable",energyAvailable);
 
 
