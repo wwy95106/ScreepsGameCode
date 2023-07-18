@@ -18,14 +18,13 @@ module.exports.loop = function () {
     let {
         controller,
         energyAvailable,
-        myCreeps
+        energyCapacityAvailable,
     } = gi.basic("Spawn1");
 
-    console.log("controller level: " + controller.level);
-    console.log("controller progress: " + controller.progress + "/" + controller.progressTotal);
-    console.log("controller ticksToDowngrade tick : " + controller.ticksToDowngrade);
-    console.log("spawn energy : " + energyAvailable);
-    console.log("my creeps:" + myCreeps);
+    // level  progress
+    console.log(`level : ${controller.level}, progress : ${controller.progress} / ${controller.progressTotal}, ticksToDowngrade : ${controller.ticksToDowngrade}`);
+    // available energy
+    console.log(`energy : ${energyAvailable} / ${energyCapacityAvailable}`);
 
     // 创建 creep
     roleCreate.run(energyAvailable);

@@ -87,9 +87,41 @@ let roleRoot = {
         if (creep.transfer(spawn, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             creep.moveTo(spawn, { visualizePathStyle: { stroke: '#ffaa00' } });
         };
+    },
+
+    /**
+     * 将资源从该 creep 转移至其他对象
+     * @param {creep} creep
+     * @param {target} target
+     * @param {resourceType} resourceType
+     * @return {undefined}
+     */
+    transferTargetEnergy: function (creep, target, resourceType) {
+        // 未完成
+        // creep.pos.isNearTo(target)
+        if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(target);
+
+            // 转移所有资源
+            for (const resourceType in creep.carry) {
+                creep.transfer(target, resourceType);
+            }
+        }
+    },
+
+    /**
+     * 捡起一个物品 (如捡起一些能量)。需要 CARRY 身体部件
+     * @param {creep} creep
+     * @param {target} target
+     * @return {undefined}
+     */
+    picUpTarget: function (creep, target) {
+        // 未完成
+        // creep.pos.isNearTo(target)
+        if (creep.pickup(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(target);
+        }
     }
-
-
 };
 
 module.exports = roleRoot;

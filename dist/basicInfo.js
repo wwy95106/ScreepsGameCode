@@ -11,10 +11,16 @@ let gi = {
 
         // 当前房间的 spawn
         let spawn = Game.spawns[spawnName];
+
         //房间
         let room = spawn.room;
+        // let roomTer = Game.map.getRoomTerrain(room.name);
+
+        console.log(`${room.controller.pos.roomName} spawn: ${room.controller.pos.x},${room.controller.pos.y}`);
+
         // 控制器
         let controller = room.controller;
+
         // 当前房间 属于我的 creeps
         let myCreeps = spawn.room.find(FIND_MY_CREEPS).length;
 
@@ -28,6 +34,8 @@ let gi = {
             },
             // 总能量
             energyAvailable: room.energyAvailable,
+            // 总上限能量
+            energyCapacityAvailable: room.energyCapacityAvailable,
             // my creeps
             myCreeps: myCreeps
         }
