@@ -10,7 +10,7 @@ let roleRoot = {
     /**
      * 获取 creep 状态 
      * @param {creep} creep
-     * @return {next state}
+     * @return {nextState}
      */
     getCreepState: function (creep) {
 
@@ -21,27 +21,32 @@ let roleRoot = {
         // 总容量
         let max = creep.store.getCapacity();
 
+
+        console.log(`----------------`);
         // creep 下一步目标 采集||工作
-        let nextTarget = creep.memory.nextTarget;
+        let nowTarget = creep.memory.nextTarget;
+        // console.log(`---nowTarget:${nowTarget}`);
+        // console.log(`---role:${creep.memory.role}`);
 
-        let nextState = "work";
-
-        if (nextTarget === "harveste" && ((free < max && used < max) || free === max)) {
-            // 持续采集状态
-            nextState = "harveste";
-        } else if (nextTarget === "harveste" && used === max) {
-            // 转换为工作状态
-            creep.memory.nextTarget === "work";
-            nextState = "work";
-        } else if (nextTarget === "work" && (free < max && used < max)) {
-            // 持续工作状态
-            nextState = "work";
-        } else if (nextTarget === "work" && free === max) {
-            // 转换为采集状态
-            creep.memory.nextTarget === "harveste";
-            nextState = "harveste";
+        // 修正 creep 创建时 内存 错误
+        if (creep.memory.nextTarget !== "harveste" || creep.memory.nextTarget !== "work") {
+            creep.memory.nextTarget = "harveste";
         }
 
+        let isMiddle = free < max && used < max;
+        let isFull = used == max;
+        let isEmpty = free == max;
+
+        if (isMiddle) {
+            nextState = nowTarget;
+        } else if (isFull) {
+            nextState = "work"; // 转换为工作
+        } else if (isEmpty) {
+            nextState = "harveste"; // 转换为采集
+        }
+
+        console.log(`creepState(${creep.memory.role}):${free}-${used}-${max} => ${nextState}`);
+        creep.memory.nextTarget = nextState;
         return nextState;
     },
 
@@ -51,6 +56,7 @@ let roleRoot = {
      * @return {undefined}
      */
     toDoUpdate: function (creep) {
+        console.log(`toDoUpdate`);
         const controller = creep.room.controller;
         if (creep.upgradeController(controller) == ERR_NOT_IN_RANGE) {
             creep.moveTo(controller, { visualizePathStyle: { stroke: '#ffffff' } });
@@ -63,6 +69,7 @@ let roleRoot = {
      * @return {undefined}
      */
     toDoHarveste: function (creep) {
+        console.log(`toDoHarveste`);
         let sources = creep.room.find(FIND_SOURCES);
         if (creep.harvest(sources[creep.memory.target || 0]) == ERR_NOT_IN_RANGE) {
             creep.moveTo(sources[creep.memory.target || 0], { visualizePathStyle: { stroke: '#ffaa00' } });
@@ -75,9 +82,10 @@ let roleRoot = {
      * @return {undefined}
      */
     saveToSpawn: function (creep, spawnName) {
+        console.log(`saveToSpawn:${spawnName}`);
         const spawn = Game.spawns[spawnName];
-        if (creep.transfer(Game.spawns[spawn], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(Game.spawns[spawn], { visualizePathStyle: { stroke: '#ffaa00' } });
+        if (creep.transfer(spawn, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(spawn, { visualizePathStyle: { stroke: '#ffaa00' } });
         };
     }
 

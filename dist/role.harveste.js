@@ -14,12 +14,13 @@ let roleHarvester = {
             // 采集
             roleRoot.toDoHarveste(creep);
         } else if (creepState === "work") {
+            // console.log(energyAvailable);
             if (energyAvailable === 300) {
                 // 升级
                 roleRoot.toDoUpdate(creep);
             } else {
                 // 存储
-                roleRoot.toDoHarveste(creep, 'Spawn1');
+                roleRoot.saveToSpawn(creep, 'Spawn1');
             }
         };
     }

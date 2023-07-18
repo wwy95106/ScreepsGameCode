@@ -1,17 +1,14 @@
 // 控制台输出用户、房间等基本信息
 let gi = require("basicInfo");
 
-
 // 采集
-let roleHarvester = require('roleHarvester');
+let roleHarvester = require('role.harveste');
 
 // 升级
-let roleUpgrader = require('roleUpgrader');
+let roleUpgrader = require('role.upgrade');
 
 // 创建creeps
-let createCreeps = require('createCreep');
-
-
+let roleCreate = require('role.create');
 
 // 主方法
 module.exports.loop = function () {
@@ -31,20 +28,18 @@ module.exports.loop = function () {
     console.log("my creeps:" + myCreeps);
 
     // 创建 creep
-    createCreeps.run(energyAvailable);
+    roleCreate.run(energyAvailable);
 
     // 工作
     for (let name in Game.creeps) {
 
         let creep = Game.creeps[name];
-        // console.log(creep.memory.role);
 
         if (creep.memory.role == 'harvester') {
             roleHarvester.run(creep, energyAvailable);
         }
         if (creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);
-            // console.log(roleUpgrader.testProperty);
         }
     };
 
