@@ -21,6 +21,7 @@ module.exports.loop = function () {
         energyCapacityAvailable,
     } = gi.basic("Spawn1");
 
+
     // level  progress
     console.log(`level : ${controller.level}, progress : ${controller.progress} / ${controller.progressTotal}, ticksToDowngrade : ${controller.ticksToDowngrade}`);
     // available energy
@@ -42,8 +43,14 @@ module.exports.loop = function () {
         }
     };
 
+    // console.log(Game.rooms["E48S41"].controller);
+    //let exitsList = Game.map.describeExits("E49S41");
+    //exitsList = Object.keys(exitsList);
+    // console.log(exitsList);
+    // console.log(exitsList[0]);
+    // console.log(Object.keys(exitsList).length);
 
-    // console.log(roleRoot.testProperty);
+    // console.log(Game.map.describeExits("E49S41")["1"])
 
     console.log('---------' + Game.time + '----end-----');
     console.log("-");
